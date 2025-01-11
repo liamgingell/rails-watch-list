@@ -1,17 +1,29 @@
 <h1>Make a new bookmark</h1>
 
+<%= form_with model: [@bookmark.list, @bookmark], local: true do |form| %>
+  <div class="field">
+    <%= form.label :list_id, "Select List" %>
+    <%= form.collection_select :list_id, List.all, :id, :name, prompt: "Choose a list" %>
+  </div>
 
-<%= form_with model: @list, local: true do |form| %>
-    <div class="field">
-      <%= form.label :comment %>
-      <%=  form.text_field :comment %>
-      <%= form.label :rating %>
-      <%= form.number_field :rating, step: :any %>
-    </div>
+  <div class="field">
+    <%= form.label :movie_title, "Enter Movie Title" %>
+    <%= form.text_field :movie_title %>
+  </div>
 
-    <div class="actions">
-      <%= form.submit "Create Bookmark" %>
-    </div>
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, step: :any %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Bookmark" %>
+  </div>
 <% end %>
 
 <%= link_to "Return to Index", lists_path %>
