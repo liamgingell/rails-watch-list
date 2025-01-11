@@ -1,0 +1,15 @@
+<h1>Make a new list</h1>
+
+
+<%= form_with model: @list, local: true do |form| %>
+    <div class="field">
+      <%= form.label :name %>
+      <%=  form.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Create List" %>
+    </div>
+<% end %>
+
+<%= link_to "Return to Index", lists_path %>
