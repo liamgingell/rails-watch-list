@@ -1,19 +1,29 @@
-<h1>Cine Lister</h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4 text-center mb-4">Cine Lister</h1>
 
-<h2>Lists</h2>
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
-  <% end %>
-</ul>
+      <h2 class="mb-4">Lists</h2>
+      <ul class="list-group mb-4">
+        <% @lists.each do |list| %>
+          <li class="list-group-item">
+            <%= link_to list.name, list_path(list), class: 'text-decoration-none' %>
+          </li>
+        <% end %>
+      </ul>
 
-<div>
-  <%= link_to "Make a New List", new_list_path %>
-</div>
+      <div class="text-center mb-4">
+        <%= link_to "Make a New List", new_list_path, class: 'btn btn-primary' %>
+      </div>
 
-<h2>Bookmarks</h2>
-<div>
-  <% @bookmarks.each do |bookmark| %>
-    <div><%= link_to "Make a new bookmark", new_list_bookmark_path(bookmark.list, bookmark) %></div>
-  <% end %>
+      <h2 class="mb-4">Bookmarks</h2>
+      <ul class="list-group">
+        <% @bookmarks.each do |bookmark| %>
+          <li class="list-group-item">
+            <%= link_to "Make a new bookmark", new_list_bookmark_path(bookmark.list, bookmark), class: 'text-decoration-none' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>

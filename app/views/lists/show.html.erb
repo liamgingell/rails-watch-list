@@ -1,24 +1,34 @@
-<h1><%= @list.name %></h1>
-<div>
-  <% if @list.photo.attached? %>
-    <%= cl_image_tag @list.photo.key %>
-  <% else %>
-    <%= image_tag 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPQDYau3Hs4-xw1i8jVSUY4BlF4FLmg8lQqg&usqp=CAU' %>
-  <% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4 text-center mb-4"><%= @list.name %></h1>
+      <div class="text-center mb-4">
+        <% if @list.photo.attached? %>
+          <%= cl_image_tag @list.photo.key, class: 'img-fluid rounded' %>
+        <% else %>
+          <%= image_tag 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPQDYau3Hs4-xw1i8jVSUY4BlF4FLmg8lQqg&usqp=CAU', class: 'img-fluid rounded' %>
+        <% end %>
+      </div>
+
+      <div class="text-center mb-4">
+        <%= link_to 'Delete list', list_path(@list), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+
+      <ul class="list-group">
+        <% @list.bookmarks.each do |bookmark| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong><%= bookmark.movie.title %>:</strong>
+              <%= bookmark.comment %>
+            </div>
+            <%= link_to 'Delete Bookmark', list_bookmark_path(@list, bookmark), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="text-center mt-4">
+        <%= link_to "Return to Index", lists_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%# <div>
-  <%= link_to 'Delete list', list_path(@list), method: :delete, data: { confirm: 'Are you sure?' } %>
-<%# </div> %>
-
-<ul>
-  <% @list.bookmarks.each do |bookmark| %>
-    <li>
-      <strong><%= bookmark.movie.title %>:</strong>
-      <%= bookmark.comment %>
-      <%= link_to 'Delete Bookmark', list_bookmark_path(@list, bookmark), method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to "Return to Index", lists_path %>
