@@ -1,15 +1,24 @@
-<h1>Make a new list</h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4 text-center mb-4">Make A New Movie List</h1>
 
+      <div class="card p-4">
+        <%= simple_form_for(@list) do |f| %>
+          <div class="field">
+            <%= f.input :name, label: "List Name" %>
+            <%= f.input :photo, as: :file %>
+          </div>
 
-<%= simple_form_for(@list) do |f| %>
-    <div class="field">
-      <%= f.input :name, label: "list name" %>
-      <%= f.input :photo, as: :file %>
+          <div class="actions text-center">
+            <%= f.submit "Create List", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center mt-4">
+        <%= link_to "Return to Index", lists_path, class: "btn btn-secondary" %>
+      </div>
     </div>
-
-    <div class="actions">
-      <%= f.submit "Create List" %>
-    </div>
-<% end %>
-
-<%= link_to "Return to Index", lists_path %>
+  </div>
+</div>

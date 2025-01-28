@@ -1,29 +1,41 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h1 class="display-4 text-center mb-4">Cine Lister</h1>
+      <h1 class="display-4 text-center mb-5">Cine Lister</h1>
 
-      <h2 class="mb-4">Lists</h2>
-      <ul class="list-group mb-4">
-        <% @lists.each do |list| %>
-          <li class="list-group-item">
-            <%= link_to list.name, list_path(list), class: 'text-decoration-none' %>
-          </li>
-        <% end %>
-      </ul>
-
-      <div class="text-center mb-4">
-        <%= link_to "Make a New List", new_list_path, class: 'btn btn-primary' %>
+      <div class="mb-5">
+        <h2 class="mb-4">Your Cine Lists</h2>
+        <div class="row">
+          <% @lists.each do |list| %>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <% if list.photo.attached? %>
+                  <%= cl_image_tag list.photo.key, class: 'card-img-top' %>
+                <% else %>
+                  <%= image_tag 'https://via.placeholder.com/150', class: 'card-img-top' %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to list.name, list_path(list), class: 'text-decoration-none' %></h5>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-center">
+          <%= link_to "Make a New List", new_list_path, class: 'btn btn-primary' %>
+        </div>
       </div>
 
-      <h2 class="mb-4">Bookmarks</h2>
-      <ul class="list-group">
-        <% @bookmarks.each do |bookmark| %>
-          <li class="list-group-item">
-            <%= link_to "Make a new bookmark", new_list_bookmark_path(bookmark.list, bookmark), class: 'text-decoration-none' %>
-          </li>
-        <% end %>
-      </ul>
+      <div class="mb-5">
+        <h2 class="mb-4">Bookmarks</h2>
+        <ul class="list-group mb-4">
+          <% @bookmarks.each do |bookmark| %>
+            <li class="list-group-item">
+              <%= link_to "Make a new bookmark", new_list_bookmark_path(bookmark.list, bookmark), class: 'text-decoration-none' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
